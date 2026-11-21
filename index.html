@@ -1,0 +1,2336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlBaik — Fresh Chicken, Legendary Taste</title>
+  <link rel="icon" type="image/jpeg" href="images/albaik logo 2.jfif" />
+  <link rel="apple-touch-icon" href="images/albaik logo 2.jfif" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    :root {
+      --primary-red: #D62828;
+      --dark-red: #B71C1C;
+      --light-red: #F44336;
+      --white: #FFFFFF;
+      --off-white: #F8F9FA;
+      --light-gray: #F3F4F6;
+      --dark-text: #1F2937;
+      --gray-text: #6B7280;
+      --light-text: #9CA3AF;
+      --yellow: #FFC107;
+      --gold: #FFB300;
+      --footer-bg: #0F172A;
+      --footer-text: #E5E7EB;
+      --border: #E5E7EB;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --hero-bg-image-1: url('images/hero bg 1.jpg');
+      --hero-bg-image-2: url('images/hero bg 2.jpg');
+      --hero-bg-image-3: url('images/hero bg 33.jpg'); 
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 30px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark-text);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    img { max-width: 100%; display: block; }
+    input, textarea, select { font-family: inherit; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .section { padding: 70px 0; }
+
+    /* ============================================================
+       ⭐ SKELETON LOADER
+       ============================================================ */
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+
+    .skeleton-loader {
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      z-index: 99999;
+      padding: 20px;
+      overflow: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .skeleton-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .skeleton-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 40px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .skeleton-logo { width: 140px; height: 50px; border-radius: 10px; }
+    .skeleton-nav-links { display: flex; gap: 30px; }
+    .skeleton-nav-link { width: 60px; height: 16px; border-radius: 6px; }
+    .skeleton-cart { width: 50px; height: 50px; border-radius: 50%; }
+
+    .skeleton-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .skeleton-card { display: flex; flex-direction: column; gap: 12px; }
+    .skeleton-image { width: 100%; height: 220px; border-radius: 12px; }
+    .skeleton-text-row { display: flex; align-items: center; gap: 12px; }
+    .skeleton-avatar { width: 45px; height: 45px; border-radius: 50%; flex-shrink: 0; }
+    .skeleton-text-lines { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .skeleton-text { width: 70%; height: 14px; border-radius: 6px; }
+    .skeleton-text-sm { width: 40%; height: 12px; border-radius: 6px; }
+
+    .skeleton-logo, .skeleton-nav-link, .skeleton-cart, .skeleton-image,
+    .skeleton-avatar, .skeleton-text, .skeleton-text-sm {
+      background: linear-gradient(90deg, #e2e2e2 25%, #f0f0f0 50%, #e2e2e2 75%);
+      background-size: 1000px 100%;
+      animation: shimmer 1.8s infinite linear;
+    }
+
+    @media (max-width: 768px) {
+      .skeleton-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+      .skeleton-image { height: 160px; }
+      .skeleton-nav { padding: 10px 15px; }
+      .skeleton-logo { width: 100px; height: 40px; }
+      .skeleton-nav-links { gap: 15px; }
+      .skeleton-nav-link { width: 40px; height: 12px; }
+      .skeleton-cart { width: 40px; height: 40px; }
+    }
+    @media (max-width: 480px) {
+      .skeleton-grid { grid-template-columns: 1fr; }
+      .skeleton-image { height: 180px; }
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 26px; border-radius: var(--radius-sm); font-weight: 600; font-size: 14px;
+      transition: all .3s ease; border: 2px solid transparent; white-space: nowrap;
+    }
+    .btn-primary { background: var(--primary-red); color: var(--white); border-color: var(--primary-red); }
+    .btn-primary:hover { background: var(--dark-red); border-color: var(--dark-red); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--primary-red); border-color: var(--primary-red); }
+    .btn-outline:hover { background: var(--primary-red); color: var(--white); transform: translateY(-2px); }
+    .btn-white { background: var(--white); color: var(--primary-red); border-color: var(--white); }
+    .btn-white:hover { background: var(--off-white); transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--white); border-color: var(--white); }
+    .btn-ghost:hover { background: var(--white); color: var(--primary-red); }
+    .btn-sm { padding: 8px 18px; font-size: 13px; }
+    .btn-lg { padding: 15px 30px; font-size: 16px; }
+    .btn-block { width: 100%; }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      background: var(--white); box-shadow: 0 2px 15px rgba(0,0,0,.05);
+      transition: box-shadow .3s;
+    }
+    .nav-container {
+      width: 100%; margin: 0 auto;
+      padding: 14px 102px 14px 132px; 
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    
+    .nav-logo {
+      display: flex; align-items: center; 
+      gap: 5px; 
+      background: transparent; border: none; padding: 0; color: inherit;
+      flex: 1; 
+      justify-content: flex-start;
+    }
+    .nav-logo img { width: 52px; height: 52px; object-fit: contain; }
+    .logo-text {
+      font-size: 32px; font-weight: 800; color: var(--primary-red);
+      letter-spacing: -1.2px; font-style: italic; line-height: 1;
+    }
+    .logo-text span { color: var(--primary-red); }
+    
+    .nav-links { 
+      display: flex; gap: 36px; 
+      flex: 0 0 auto; 
+      justify-content: center;
+    }
+    .nav-links a {
+      font-size: 15px; font-weight: 400; color: var(--dark-text);
+      position: relative; padding: 6px 0; transition: color .3s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; bottom: -2px;
+      width: 0; height: 2px; background: var(--primary-red);
+      border-radius: 2px; transition: width .35s ease;
+    }
+    .nav-links a:hover { color: var(--primary-red); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--primary-red); }
+    .nav-links a.active::after { width: 100%; }
+    
+    .nav-actions { 
+      display: flex; align-items: center; gap: 14px; 
+      flex: 1; 
+      justify-content: flex-end;
+    }
+    .icon-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--dark-text);
+      transition: background .3s, color .3s;
+    }
+    .icon-btn:hover { background: var(--light-gray); color: var(--primary-red); }
+    .cart-btn {
+      position: relative;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: #FFEDE3;
+      border: 1.5px solid #FFD9C7;
+      color: var(--primary-red);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: all .3s ease;
+      flex-shrink: 0;
+      padding: 0;
+    }
+    .cart-btn svg {
+      width: 26px; height: 26px;
+      stroke: var(--primary-red); stroke-width: 2;
+      fill: none; stroke-linecap: round; stroke-linejoin: round;
+      transition: stroke .3s ease;
+    }
+    .cart-btn:hover {
+      background: var(--primary-red);
+      border-color: var(--primary-red);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(214, 40, 40, 0.35);
+    }
+    .cart-btn:hover svg { stroke: var(--white); }
+    .cart-count {
+      position: absolute; top: -4px; right: -4px;
+      background: var(--primary-red); color: var(--white);
+      font-size: 12px; font-weight: 700; min-width: 24px; height: 24px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      padding: 0 6px; border: 2px solid var(--white);
+      transition: all .3s ease;
+      line-height: 1;
+    }
+    .cart-btn:hover .cart-count {
+      background: var(--white);
+      color: var(--primary-red);
+      border-color: var(--primary-red);
+    }
+    .hamburger {
+      display: none; width: 40px; height: 40px; border-radius: var(--radius-sm);
+      font-size: 20px; color: var(--dark-text);
+    }
+
+    /* ✅ Nav overlay - mobile menu ke liye */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .nav-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ============ HERO (DESKTOP) ============ */
+    .hero {
+      position: relative; width: 100%; height: 100vh;
+      min-height: 620px; max-height: 900px; padding: 0;
+      display: flex; align-items: flex-end; overflow: hidden; background: #111;
+    }
+    .hero-bg-slide {
+      position: absolute; inset: 0;
+      background-size: 100% 92%; background-position: center 93%;
+      background-repeat: no-repeat; opacity: 0;
+      transition: opacity 1.2s ease-in-out; z-index: 0;
+    }
+    .hero-bg-slide.active { opacity: 1; }
+    .hero-bg-slide.slide-1 { background-image: var(--hero-bg-image-1); }
+    .hero-bg-slide.slide-2 { background-image: var(--hero-bg-image-2); }
+    .hero-bg-slide.slide-3 { background-image: var(--hero-bg-image-3); }
+
+    .hero-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7); color: #333;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 5; transition: all 0.3s ease;
+      border: none; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(4px);
+    }
+    .hero-arrow svg {
+      width: 18px; height: 18px; stroke: currentColor; stroke-width: 2.5;
+      fill: none; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .hero-arrow:hover {
+      background: #fff; color: var(--primary-red);
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    }
+    .hero-arrow.prev { left: 25px; }
+    .hero-arrow.next { right: 25px; }
+
+    .hero-dots {
+      position: absolute; bottom: 25px; left: 50%;
+      transform: translateX(-50%); display: flex; gap: 10px; z-index: 5;
+    }
+    .hero-dot {
+      width: 11px; height: 11px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5); cursor: pointer;
+      transition: all 0.3s; border: none; padding: 0;
+    }
+    .hero-dot:hover { background: rgba(255, 255, 255, 0.8); }
+    .hero-dot.active { background: var(--white); width: 32px; border-radius: 6px; }
+
+    .hero-grid { position: relative; z-index: 2; width: 100%; padding-bottom: 106px; }
+    .hero-content { max-width: 560px; color: var(--white); padding-left: 0; margin-left: -12px; }
+
+    .hero-buttons { display: flex; gap: 14px; margin-bottom: 22px; flex-wrap: wrap; }
+    .hero-buttons .btn-white {
+      padding: 13px 34px; border-radius: 30px; font-size: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); font-weight: 700;
+    }
+    .hero-buttons .btn-ghost {
+      padding: 13px 34px; border-radius: 30px; font-size: 15px;
+      backdrop-filter: blur(6px); background: rgba(0, 0, 0, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.95); font-weight: 700;
+    }
+    .hero-buttons .btn-ghost:hover { background: var(--white); color: var(--primary-red); }
+
+    .hero-features { display: flex; gap: 38px; flex-wrap: wrap; }
+    .hero-feature {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; color: var(--white); line-height: 1.3; font-weight: 500;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+    }
+    .hero-feature i { font-size: 20px; color: var(--white); text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9); }
+
+    /* ============ SECTIONS ============ */
+    .section-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 50px; gap: 20px; flex-wrap: wrap;
+    }
+    .section-header.center { flex-direction: column; align-items: center; text-align: center; }
+    .section-label {
+      display: block; font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--primary-red); margin-bottom: 5px;
+    }
+    .section-header h2 { font-size: 30px; font-weight: 800; }
+    .section-desc { color: var(--gray-text); font-size: 14px; margin-top: 8px; }
+    .view-all {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--primary-red); font-weight: 600; font-size: 14px;
+      transition: gap .3s;
+    }
+    .view-all:hover { gap: 12px; }
+
+    .categories-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+    .category-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 20px 15px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      transition: transform .3s, box-shadow .3s; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .category-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+    .category-img { width: 100%; height: 100px; object-fit: contain; margin-bottom: 15px; }
+    .category-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--dark-text); }
+    .category-card span { font-size: 13px; color: var(--primary-red); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; transition: gap .3s; }
+    .category-card:hover span { gap: 10px; }
+
+    /* ============ ABOUT ============ */
+    .about-section { background: var(--white); padding-bottom: 20px; }
+    .about-box {
+      background: var(--off-white); border-radius: 12px; padding: 45px 50px;
+      position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+    .about-title { font-size: 28px; font-weight: 800; color: var(--dark-text); margin-bottom: 15px; line-height: 1.3; letter-spacing: -0.5px; }
+    .about-text-wrapper {
+      position: relative; max-height: 120px; overflow: hidden;
+      transition: max-height 0.6s ease;
+    }
+    .about-text-wrapper::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 70px;
+      background: linear-gradient(to bottom, transparent, var(--off-white));
+      pointer-events: none; transition: opacity 0.6s ease;
+    }
+    .about-text-wrapper.expanded { max-height: 1000px; }
+    .about-text-wrapper.expanded::after { opacity: 0; }
+    .about-text { font-size: 15px; color: var(--gray-text); line-height: 1.8; margin-bottom: 12px; }
+    .about-text:last-child { margin-bottom: 0; }
+    .show-more-btn {
+      margin-top: 15px; font-size: 14px; font-weight: 600; color: var(--dark-text);
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: color 0.3s; padding: 5px 0; background: transparent; border: none; cursor: pointer;
+    }
+    .show-more-btn:hover { color: var(--primary-red); }
+    .show-more-btn i { transition: transform 0.3s ease; font-size: 12px; }
+    .show-more-btn.active i { transform: rotate(180deg); }
+
+    /* ============ BESTSELLERS ============ */
+    .bestsellers-scroll {
+      display: flex; gap: 20px; overflow-x: auto; padding-bottom: 10px;
+      scroll-behavior: smooth;
+    }
+    .bestsellers-scroll::-webkit-scrollbar { display: none; }
+    .bestseller-card {
+      min-width: 260px; background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); overflow: hidden;
+      box-shadow: 0 10px 30px var(--shadow); transition: transform .3s; flex-shrink: 0;
+      cursor: pointer;
+    }
+    .bestseller-card:hover { transform: translateY(-4px); }
+    .bestseller-card img { width: 100%; height: 160px; object-fit: cover; }
+    .bestseller-info { padding: 15px; }
+    .bestseller-info h4 { font-size: 15px; font-weight: 600; margin-bottom: 5px; }
+    .bestseller-info p { font-size: 13px; color: var(--gray-text); margin-bottom: 10px; min-height: 36px; }
+    .bestseller-info .price { font-size: 17px; font-weight: 700; color: var(--primary-red); margin-bottom: 10px; }
+
+    .slider-controls { display: flex; gap: 8px; }
+    .slider-controls button {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--light-gray); color: var(--dark-text);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .3s;
+    }
+    .slider-controls button:hover { background: var(--primary-red); color: var(--white); }
+
+    /* ============ MENU ============ */
+    .menu-section { padding-top: 30px; }
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 35px; }
+    .filter-btn {
+      padding: 8px 18px; border-radius: 30px; background: var(--light-gray);
+      color: var(--gray-text); font-size: 13px; font-weight: 500;
+      transition: all .3s;
+    }
+    .filter-btn:hover { background: #e5e7eb; }
+    .filter-btn.active { background: var(--primary-red); color: var(--white); }
+
+    .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    .menu-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm);
+      overflow: hidden; box-shadow: 0 10px 30px var(--shadow);
+      transition: transform .3s; display: flex; flex-direction: column;
+      cursor: pointer;
+    }
+    .menu-card:hover { transform: translateY(-4px); }
+    .menu-card img { width: 100%; height: 175px; object-fit: cover; }
+    .menu-info { padding: 16px; display: flex; flex-direction: column; flex: 1; }
+    .menu-info h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .menu-info p { font-size: 13px; color: var(--gray-text); margin-bottom: 10px; flex: 1; min-height: 36px; }
+    .menu-info .price { font-size: 17px; font-weight: 700; color: var(--primary-red); margin-bottom: 12px; }
+
+    .category-banner {
+      width: 100%; border-radius: 20px; overflow: hidden;
+      margin: 50px 0 40px; box-shadow: 0 10px 30px rgba(214, 40, 40, 0.15);
+      line-height: 0;
+    }
+    .category-banner img {
+      width: 100%; height: auto; display: block;
+      border-radius: 20px; object-fit: cover;
+    }
+
+    .no-results { display: block; text-align: center; padding: 50px 0; color: var(--gray-text); }
+    .no-results.hidden { display: none; }
+    .no-results i { font-size: 40px; color: var(--light-text); margin-bottom: 15px; }
+    .no-results h3 { color: var(--dark-text); margin-bottom: 5px; }
+
+    /* ============ REVIEWS ============ */
+    .reviews-section { background: var(--off-white); }
+    .reviews-header { text-align: center; margin-bottom: 50px; }
+    .reviews-header h2 { font-size: 42px; font-weight: 800; color: var(--dark-text); line-height: 1.2; }
+    .reviews-header h2 span { color: var(--primary-red); }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .review-card {
+      background: var(--white); border-radius: 20px; padding: 35px 28px;
+      text-align: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      transition: transform 0.3s, box-shadow 0.3s; border: 1px solid rgba(0,0,0,0.02);
+    }
+    .review-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); }
+    .review-stars { display: flex; justify-content: center; gap: 4px; margin-bottom: 20px; }
+    .review-stars i { color: #FBBF24; font-size: 16px; }
+    .review-text { font-size: 15px; color: var(--dark-text); line-height: 1.7; font-style: italic; margin-bottom: 22px; min-height: 80px; }
+    .review-author { font-size: 15px; font-weight: 700; color: var(--primary-red); letter-spacing: 0.3px; }
+
+    /* ============ PROMO ============ */
+    .promo-banner { background: var(--primary-red); color: var(--white); padding: 40px 0; }
+    .promo-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; }
+    .promo-text .offer-badge {
+      display: inline-block; background: rgba(255, 255, 255, 0.25); color: var(--white);
+      font-size: 12px; font-weight: 600; padding: 6px 16px; border-radius: 30px;
+      margin-bottom: 15px; letter-spacing: 0.3px; backdrop-filter: blur(10px);
+    }
+    .promo-text h2 { font-size: 38px; font-weight: 900; line-height: 1.1; margin-bottom: 12px; letter-spacing: -1px; }
+    .promo-text h2 span { color: var(--yellow); }
+    .promo-text p { font-size: 15px; opacity: 0.95; margin-bottom: 0; max-width: 500px; }
+    .promo-text p strong { color: var(--yellow); font-weight: 700; }
+    .promo-visual { text-align: center; display: flex; align-items: center; justify-content: center; position: relative; }
+    .promo-visual img {
+      width: 240px; height: 240px; object-fit: cover; border-radius: 50%;
+      border: 8px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+    .promo-badge-circle {
+      position: absolute; top: -5px; right: 40px;
+      width: 75px; height: 75px; background: var(--yellow); color: var(--dark-text);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 900; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      z-index: 3; letter-spacing: -1px;
+    }
+
+    /* ============ MAP ============ */
+    .map-section { background: var(--off-white); padding: 70px 0 0; color: var(--dark-text); }
+    .map-header { text-align: center; margin-bottom: 40px; }
+    .map-header h2 {
+      font-size: 40px; font-weight: 800; color: var(--dark-text);
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      letter-spacing: -0.5px;
+    }
+    .map-header h2 i { color: var(--primary-red); font-size: 32px; }
+    .map-header p { color: var(--gray-text); font-size: 15px; margin-top: 8px; }
+    .map-wrapper {
+      width: 100%; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); margin-bottom: 0;
+      background: #fff; border: 1px solid var(--border);
+    }
+    .map-wrapper iframe { width: 100%; height: 420px; border: 0; display: block; }
+    .map-address-bar {
+      display: flex; justify-content: center; align-items: center;
+      gap: 10px; background: transparent; padding: 25px 0;
+      text-align: center; margin-bottom: 0; border: none; box-shadow: none; border-radius: 0;
+    }
+    .map-address-bar i { color: var(--primary-red); font-size: 22px; }
+    .map-address-bar span { color: var(--dark-text); font-size: 17px; font-weight: 600; letter-spacing: 0.2px; }
+
+    /* ============ FOOTER ============ */
+    .footer { 
+      background: var(--white); color: var(--dark-text); padding: 0;
+      border-top: none; min-height: 55vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding-top: 80px;
+    }
+    .footer .container { width: 100%; }
+    .footer-content {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 40px; margin-bottom: 30px; flex-wrap: wrap;
+      padding: 60px 0 20px;
+    }
+    .footer-logo-box { flex-shrink: 0; }
+    .footer-logo-box img {
+      width: 140px; height: 140px; object-fit: contain;
+      border-radius: 12px; background: transparent; padding: 0; border: none;
+    }
+    .footer-info { flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 8px; padding-top: 0; }
+    .footer-info h3 { font-size: 26px; font-weight: 800; color: var(--dark-text); margin-bottom: 5px; letter-spacing: -0.5px; }
+    .footer-info h3 span { color: var(--primary-red); }
+    .footer-info-item { display: flex; align-items: center; gap: 8px; font-size: 15px; color: var(--dark-text); line-height: 1.4; }
+    .footer-info-item .label { font-weight: 700; color: var(--dark-text); min-width: 65px; }
+    .footer-info-item a, .footer-info-item span.value { color: var(--gray-text); transition: color 0.3s; font-weight: 500; }
+    .footer-info-item a:hover { color: var(--primary-red); }
+    .footer-social { flex-shrink: 0; display: flex; flex-direction: column; gap: 10px; padding-top: 0; }
+    .footer-social h4 { font-size: 18px; font-weight: 700; color: var(--dark-text); margin-bottom: 2px; }
+    .footer-social-icons { display: flex; gap: 10px; }
+    .footer-social-icons a {
+      width: 42px; height: 42px; border-radius: 50%; background: var(--off-white);
+      color: var(--dark-text); display: flex; align-items: center; justify-content: center;
+      font-size: 18px; transition: all 0.3s ease; border: 1px solid var(--border);
+    }
+    .footer-social-icons a.fb { background: #1877F2; color: #fff; border-color: #1877F2; }
+    .footer-social-icons a.fb:hover { background: #0d65d9; border-color: #0d65d9; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(24, 119, 242, 0.3); }
+    .footer-social-icons a.ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #fff; border-color: #dc2743; }
+    .footer-social-icons a.ig:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(220, 39, 67, 0.3); }
+    .footer-social-links { display: flex; gap: 15px; margin-top: 0; }
+    .footer-social-links a { font-size: 14px; color: var(--gray-text); transition: color 0.3s; font-weight: 500; }
+    .footer-social-links a:hover { color: var(--primary-red); }
+    .footer-bottom {
+      border-top: none; padding: 20px 0 30px; margin-top: 0;
+      text-align: center; font-size: 14px; color: var(--gray-text);
+    }
+    .footer-bottom a { color: var(--primary-red); font-weight: 700; transition: color 0.3s; }
+    .footer-bottom a:hover { color: var(--dark-red); }
+
+    /* ============ SCROLL TOP ============ */
+    .scroll-top-btn {
+      position: fixed; bottom: 30px; right: 30px;
+      width: 50px; height: 50px; border-radius: 50%;
+      background: var(--primary-red); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; cursor: pointer; z-index: 999;
+      opacity: 0; visibility: hidden; transform: translateY(20px);
+      transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(214, 40, 40, 0.4);
+      border: none;
+    }
+    .scroll-top-btn.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .scroll-top-btn:hover { background: var(--dark-red); transform: translateY(-5px); box-shadow: 0 12px 30px rgba(214, 40, 40, 0.5); }
+
+    /* ============ OVERLAY / MODALS ============ */
+    .overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 2000;
+      opacity: 0; visibility: hidden; transition: all .3s;
+    }
+    .overlay.active { opacity: 1; visibility: visible; }
+
+    /* ============ PRODUCT DETAIL MODAL ============ */
+    .product-modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 3500;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+      opacity: 0; visibility: hidden; transition: all .3s;
+      backdrop-filter: blur(4px);
+    }
+    .product-modal-overlay.active { opacity: 1; visibility: visible; }
+
+    .product-modal {
+      background: var(--white); border-radius: 20px;
+      width: 100%; max-width: 480px; max-height: 92vh; overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      transform: scale(.95); transition: transform .3s;
+      padding: 30px 32px;
+      position: relative;
+    }
+    .product-modal-overlay.active .product-modal { transform: scale(1); }
+
+    .product-modal-close {
+      position: absolute; top: 18px; right: 18px;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--off-white); color: var(--dark-text);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; cursor: pointer; transition: all 0.3s;
+      border: none;
+    }
+    .product-modal-close:hover { background: var(--primary-red); color: var(--white); transform: rotate(90deg); }
+
+    .product-modal h2 {
+      font-size: 26px; font-weight: 800; color: var(--dark-text);
+      margin-bottom: 10px; padding-right: 40px; letter-spacing: -0.5px;
+    }
+    .product-modal-desc {
+      font-size: 15px; color: var(--gray-text); line-height: 1.6;
+      margin-bottom: 20px; padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .product-modal .size-label {
+      font-size: 15px; font-weight: 700; color: var(--dark-text);
+      margin-bottom: 14px; display: block;
+    }
+
+    .size-options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+    .size-option {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border: 2px solid var(--border); border-radius: 12px;
+      background: var(--off-white); cursor: pointer; transition: all 0.3s;
+      position: relative;
+    }
+    .size-option:hover { border-color: var(--primary-red); background: #fff5f5; }
+    .size-option.selected { border-color: var(--primary-red); background: #fff5f5; }
+    .size-option-left { display: flex; align-items: center; gap: 14px; }
+    .size-radio {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid var(--light-text); background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s; flex-shrink: 0;
+    }
+    .size-option.selected .size-radio { border-color: var(--primary-red); }
+    .size-option.selected .size-radio::after {
+      content: ''; width: 10px; height: 10px; border-radius: 50%;
+      background: var(--primary-red);
+    }
+    .size-name { font-size: 16px; font-weight: 600; color: var(--dark-text); }
+    .size-price { font-size: 16px; font-weight: 800; color: var(--primary-red); }
+
+    .add-to-cart-btn {
+      width: 100%; padding: 16px;
+      background: var(--primary-red); color: var(--white);
+      border: none; border-radius: 30px;
+      font-size: 16px; font-weight: 700; letter-spacing: 0.3px;
+      cursor: pointer; transition: all 0.3s;
+    }
+    .add-to-cart-btn:hover {
+      background: var(--dark-red);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(214, 40, 40, 0.35);
+    }
+
+    /* ============ FLOATING CART BUTTON ============ */
+    .floating-cart {
+      position: fixed; bottom: 25px; left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: var(--primary-red); color: var(--white);
+      padding: 10px 16px 10px 14px;
+      border-radius: 50px; display: flex; align-items: center; gap: 10px;
+      cursor: pointer; z-index: 998;
+      box-shadow: 0 10px 25px rgba(214, 40, 40, 0.4);
+      opacity: 0; visibility: hidden;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: none; font-family: inherit; white-space: nowrap;
+    }
+    .floating-cart.visible { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .floating-cart:hover { background: var(--dark-red); transform: translateX(-50%) translateY(-3px); box-shadow: 0 14px 32px rgba(214, 40, 40, 0.5); }
+
+    .floating-cart-count {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--white); color: var(--primary-red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .floating-cart:hover .floating-cart-count { transform: scale(1.1); }
+    .floating-cart-text { font-size: 13px; font-weight: 700; color: var(--white); letter-spacing: 0.2px; }
+    .floating-cart-total {
+      font-size: 13px; font-weight: 800; color: var(--white);
+      padding: 4px 10px; border-radius: 16px;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.3s;
+    }
+    .floating-cart:hover .floating-cart-total { background: rgba(255, 255, 255, 0.3); }
+    .floating-cart-arrow { font-size: 12px; color: var(--white); transition: transform 0.3s; }
+    .floating-cart:hover .floating-cart-arrow { transform: translateX(3px); }
+
+    /* ============ CART DRAWER ============ */
+    .cart-drawer {
+      position: fixed; top: 0; right: -440px; width: 420px; max-width: 100%; height: 100%;
+      background: var(--white); z-index: 3001; display: flex; flex-direction: column;
+      box-shadow: -5px 0 30px rgba(0,0,0,.15); transition: right .3s ease;
+    }
+    .cart-drawer.active { right: 0; }
+    .cart-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 24px; border-bottom: 1px solid var(--border);
+    }
+    .cart-header h3 { font-size: 20px; font-weight: 800; color: var(--dark-text); }
+    .cart-header button {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--gray-text);
+      transition: all 0.3s;
+    }
+    .cart-header button:hover { background: var(--light-gray); color: var(--primary-red); }
+    .cart-items { flex: 1; overflow-y: auto; padding: 20px 24px; }
+    .empty-cart { text-align: center; padding: 60px 20px; color: var(--gray-text); }
+    .empty-cart i { font-size: 50px; color: var(--light-text); margin-bottom: 15px; }
+    .empty-cart h3 { color: var(--dark-text); font-size: 18px; margin-bottom: 5px; }
+    .empty-cart p { font-size: 14px; }
+
+    .cart-item {
+      display: flex; gap: 14px; padding-bottom: 18px; margin-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .cart-item:last-child { border-bottom: none; margin-bottom: 0; }
+    .cart-item img {
+      width: 70px; height: 70px; object-fit: cover; border-radius: 10px;
+      background: var(--light-gray); flex-shrink: 0;
+    }
+    .cart-item-info { flex: 1; padding-right: 30px; }
+    .cart-item-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 3px; color: var(--dark-text); }
+    .cart-item-info .variant { font-size: 12px; color: var(--gray-text); margin-bottom: 6px; }
+    .cart-item-info .price { font-size: 15px; font-weight: 700; color: var(--primary-red); }
+    .cart-item-controls { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+    .cart-item-controls button {
+      width: 30px; height: 30px; border-radius: 50%; background: var(--light-gray);
+      font-weight: 700; font-size: 15px; color: var(--dark-text);
+      display: flex; align-items: center; justify-content: center;
+      transition: all .3s;
+    }
+    .cart-item-controls button:hover { background: var(--primary-red); color: var(--white); }
+    .cart-item-controls span { min-width: 24px; text-align: center; font-weight: 700; font-size: 15px; }
+    .cart-item-remove {
+      position: absolute; top: 0; right: 0;
+      width: 30px; height: 30px; border-radius: 50%;
+      color: var(--light-text); font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .3s;
+    }
+    .cart-item-remove:hover { color: var(--primary-red); background: #fff5f5; }
+
+    .cart-footer { padding: 22px 24px; border-top: 1px solid var(--border); background: var(--off-white); }
+    .cart-totals { margin-bottom: 16px; }
+    .cart-totals .row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: var(--gray-text); }
+    .cart-totals .row.total {
+      font-size: 19px; font-weight: 800; color: var(--dark-text);
+      border-top: 1px solid var(--border); padding-top: 12px; margin-top: 10px;
+    }
+    .cart-totals .row.total span:last-child { color: var(--primary-red); }
+    .cart-footer .btn-block { margin-bottom: 10px; }
+
+    /* ============ CHECKOUT MODAL ============ */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 4000;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+      opacity: 0; visibility: hidden; transition: all .3s;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+    .modal {
+      background: var(--white); border-radius: 20px; width: 100%; max-width: 520px;
+      max-height: 92vh; overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      transform: scale(.96); transition: transform .3s;
+      position: relative;
+    }
+    .modal-overlay.active .modal { transform: scale(1); }
+    .modal-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 26px 28px 8px; border-bottom: none;
+    }
+    .modal-header h3 { font-size: 24px; font-weight: 800; color: var(--dark-text); margin-bottom: 4px; }
+    .modal-header p { font-size: 14px; color: var(--gray-text); font-weight: 400; }
+    .modal-header button {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--off-white); font-size: 15px; color: var(--dark-text);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s; flex-shrink: 0;
+    }
+    .modal-header button:hover { background: var(--primary-red); color: var(--white); transform: rotate(90deg); }
+    .modal-body { padding: 20px 28px 28px; }
+
+    .order-summary-box {
+      background: var(--off-white); border-radius: 14px;
+      padding: 18px 20px; margin-bottom: 22px;
+      border: 1px solid var(--border);
+    }
+    .order-summary-title {
+      font-size: 14px; font-weight: 700; color: var(--dark-text);
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 12px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .order-summary-title i { color: var(--primary-red); }
+    .order-summary-row {
+      display: flex; justify-content: space-between;
+      font-size: 14px; color: var(--gray-text); margin-bottom: 8px;
+    }
+    .order-summary-row:last-of-type { margin-bottom: 0; }
+    .order-summary-row.total {
+      font-size: 16px; font-weight: 700; color: var(--dark-text);
+      padding-top: 10px; margin-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .order-summary-row.total span:last-child { color: var(--primary-red); }
+    .delivery-note {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--gray-text);
+      margin-top: 12px; padding-top: 12px;
+      border-top: 1px dashed var(--border);
+    }
+    .delivery-note i { color: var(--primary-red); }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block; font-size: 14px; font-weight: 700;
+      margin-bottom: 7px; color: var(--dark-text);
+    }
+    .form-group label .required { color: var(--primary-red); margin-left: 2px; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 13px 16px; border: 1.5px solid var(--border);
+      border-radius: 10px; font-size: 14px; outline: none;
+      background: var(--off-white); transition: all .3s;
+      color: var(--dark-text);
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--primary-red); background: var(--white);
+      box-shadow: 0 0 0 4px rgba(214, 40, 40, 0.08);
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-group select { cursor: pointer; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .branch-info {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px; background: #fff5f5; border: 1.5px solid rgba(214, 40, 40, 0.2);
+      border-radius: 10px; margin-bottom: 16px; font-size: 13px;
+      gap: 12px; flex-wrap: wrap;
+    }
+    .branch-info-left { display: flex; align-items: center; gap: 8px; color: var(--dark-text); font-weight: 600; }
+    .branch-info-left i { color: var(--primary-red); flex-shrink: 0; }
+    .branch-info-right { display: flex; align-items: center; gap: 6px; color: #25D366; font-weight: 700; }
+    .branch-info-right i { font-size: 14px; }
+    .branch-info-right a { color: #25D366; }
+    .branch-info-right a:hover { color: #1EBE5A; }
+
+    .place-order-btn {
+      width: 100%; padding: 16px;
+      background: #25D366; color: var(--white);
+      border: none; border-radius: 30px;
+      font-size: 16px; font-weight: 700; letter-spacing: 0.3px;
+      cursor: pointer; transition: all 0.3s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-top: 8px; font-family: inherit;
+    }
+    .place-order-btn:hover {
+      background: #1EBE5A; transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+    }
+
+    /* ============ CONFIRM MODAL ============ */
+    .confirm-modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 5000;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+      opacity: 0; visibility: hidden; transition: all .3s;
+      backdrop-filter: blur(4px);
+    }
+    .confirm-modal-overlay.active { opacity: 1; visibility: visible; }
+    .confirm-modal {
+      background: var(--white); border-radius: 20px;
+      width: 100%; max-width: 380px;
+      padding: 40px 32px 32px; text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      transform: scale(.95); transition: transform .3s;
+    }
+    .confirm-modal-overlay.active .confirm-modal { transform: scale(1); }
+
+    .confirm-icon { font-size: 52px; color: #FBBF24; margin-bottom: 16px; display: inline-block; }
+    .confirm-modal h3 { font-size: 22px; font-weight: 800; color: var(--dark-text); margin-bottom: 8px; }
+    .confirm-modal p { font-size: 14px; color: var(--gray-text); margin-bottom: 26px; line-height: 1.5; }
+    .confirm-buttons { display: flex; gap: 12px; justify-content: center; }
+    .confirm-buttons button {
+      flex: 1; padding: 13px 20px; border-radius: 12px;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      transition: all 0.3s; font-family: inherit; border: none;
+    }
+    .confirm-btn-no { background: var(--light-gray); color: var(--dark-text); }
+    .confirm-btn-no:hover { background: #e5e7eb; }
+    .confirm-btn-yes { background: var(--primary-red); color: var(--white); }
+    .confirm-btn-yes:hover { background: var(--dark-red); box-shadow: 0 6px 15px rgba(214, 40, 40, 0.35); }
+
+    /* ============ SUCCESS MODAL ============ */
+    .success-modal { text-align: center; padding: 40px 30px; max-width: 420px; }
+    .success-icon { font-size: 60px; color: #25D366; margin-bottom: 15px; }
+    .success-modal h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+    .success-modal p { color: var(--gray-text); font-size: 14px; margin-bottom: 22px; }
+
+    /* ============ TOAST ============ */
+    .toast {
+      position: fixed; bottom: 100px; left: 50%; z-index: 5000;
+      transform: translateX(-50%) translateY(120px);
+      background: var(--dark-text); color: var(--white);
+      padding: 13px 26px; border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+      opacity: 0; transition: all .3s; pointer-events: none;
+      max-width: calc(100% - 40px);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast.success { background: #25D366; }
+    .toast.error { background: var(--primary-red); }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1200px) {
+      .nav-container { padding: 14px 40px 14px 40px; }
+      .footer-content { gap: 30px; }
+    }
+
+    @media (max-width: 1024px) {
+      .categories-grid { grid-template-columns: repeat(3, 1fr); }
+      .category-img { height: 80px; }
+      .menu-grid { grid-template-columns: repeat(3, 1fr); }
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-content { flex-direction: column; gap: 25px; align-items: center; text-align: center; }
+      .footer-info { align-items: center; }
+      .footer-info-item { justify-content: center; }
+      .footer-social { align-items: center; }
+      .logo-text { font-size: 28px; }
+      .nav-logo img { width: 46px; height: 46px; }
+      .nav-logo { gap: 20px; }
+      .nav-links { gap: 24px; }
+      .hero { min-height: 560px; max-height: 720px; }
+      .hero-bg-slide { background-size: 100% 90%; background-position: center 93%; }
+      .hero-content { margin-left: 0; padding-left: 10px; }
+      .hero-grid { padding-bottom: 100px; }
+      .hero-arrow { width: 35px; height: 35px; }
+      .hero-arrow svg { width: 16px; height: 16px; }
+      .hero-arrow.prev { left: 15px; }
+      .hero-arrow.next { right: 15px; }
+      .about-box { padding: 30px; }
+      .reviews-header h2 { font-size: 32px; }
+      .promo-grid { grid-template-columns: 1fr; text-align: center; }
+      .promo-text p { margin-left: auto; margin-right: auto; }
+      .promo-text h2 { font-size: 34px; }
+      .promo-visual img { width: 220px; height: 220px; }
+      .promo-badge-circle { width: 70px; height: 70px; font-size: 18px; }
+      .map-header h2 { font-size: 32px; }
+      .map-wrapper iframe { height: 350px; }
+    }
+
+    /* ✅ MOBILE (768px) — CARD HERO + NAV OVERLAY */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; 
+        position: fixed; 
+        top: 0; 
+        right: 0; 
+        width: 80%;
+        max-width: 320px;
+        height: 100%;
+        background: var(--white); 
+        flex-direction: column; 
+        gap: 0;
+        padding: 90px 24px 24px; 
+        box-shadow: -10px 0 40px rgba(0,0,0,.15);
+        z-index: 1001;
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .nav-links.active { 
+        display: flex;
+        transform: translateX(0);
+      }
+      .nav-links a { 
+        padding: 16px 0; 
+        border-bottom: 1px solid var(--border); 
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--dark-text);
+      }
+      .nav-links a:last-child { border-bottom: none; }
+      .nav-links a::after { display: none; }
+      .nav-links a.active { color: var(--primary-red); }
+      .nav-links a.active::after { display: none; }
+      
+      .hamburger { 
+        display: flex; align-items: center; justify-content: center;
+        position: relative;
+        z-index: 1002;
+        transition: all 0.3s;
+      }
+      .hamburger.active i::before {
+        content: '\f00d';
+      }
+      
+      .logo-text { font-size: 24px; }
+      .nav-logo img { width: 40px; height: 40px; }
+      .nav-logo { gap: 15px; }
+      .nav-container { padding: 12px 18px; }
+
+      /* ✅ MOBILE HERO — Card Style */
+      .hero {
+        height: auto; min-height: auto; max-height: none;
+        padding: 90px 14px 24px;
+        display: block; background: var(--white); position: relative;
+      }
+
+      .hero-bg-slide {
+        position: relative; inset: auto; width: 100%;
+        height: 220px; border-radius: 20px;
+        background-size: cover; background-position: center;
+        background-repeat: no-repeat; opacity: 0;
+        display: none; transition: opacity 0.6s ease-in-out;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      }
+      .hero-bg-slide.active { display: block; opacity: 1; }
+
+      .hero-arrow {
+        position: absolute;
+        top: 200px;
+        transform: translateY(-50%);
+        width: 36px; height: 36px;
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--primary-red);
+        box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      }
+      .hero-arrow:hover { transform: translateY(-50%) scale(1.05); }
+      .hero-arrow.prev { left: 22px; }
+      .hero-arrow.next { right: 22px; }
+      .hero-arrow svg { width: 16px; height: 16px; }
+
+      .hero-dots {
+        position: absolute; top: 286px; bottom: auto; left: 50%;
+        transform: translateX(-50%); gap: 6px; z-index: 6;
+      }
+      .hero-dot { width: 8px; height: 8px; background: rgba(0,0,0,0.25); }
+      .hero-dot:hover { background: rgba(0,0,0,0.4); }
+      .hero-dot.active { background: var(--primary-red); width: 22px; border-radius: 4px; }
+
+      .hero-grid { padding: 22px 0 0; display: block; }
+      .hero-content { max-width: 100%; padding: 0; margin: 0; text-align: center; color: var(--dark-text); }
+
+      .hero-buttons { flex-direction: column; gap: 10px; margin-bottom: 16px; }
+      .hero-buttons .btn {
+        width: 100%; padding: 13px 20px; font-size: 14px;
+        border-radius: 30px; box-shadow: none;
+      }
+      .hero-buttons .btn-white {
+        background: var(--primary-red); color: var(--white);
+        border-color: var(--primary-red);
+        box-shadow: 0 6px 18px rgba(214, 40, 40, 0.28);
+      }
+      .hero-buttons .btn-white:hover { background: var(--dark-red); border-color: var(--dark-red); }
+      .hero-buttons .btn-ghost {
+        background: var(--white); color: var(--primary-red);
+        border: 2px solid var(--primary-red); backdrop-filter: none;
+      }
+      .hero-buttons .btn-ghost:hover { background: var(--primary-red); color: var(--white); }
+
+      .hero-features { justify-content: center; gap: 16px; padding-top: 4px; }
+      .hero-feature {
+        font-size: 11px; gap: 5px; color: var(--dark-text);
+        text-shadow: none; font-weight: 500;
+      }
+      .hero-feature i { font-size: 14px; color: var(--primary-red); text-shadow: none; }
+      .hero-feature br { display: none; }
+
+      /* ============================================================ */
+
+      .section-header { flex-direction: column; align-items: flex-start; }
+      .section-header.center { align-items: center; }
+      .section-header h2 { font-size: 24px; }
+
+      .categories-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .category-img { height: 70px; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .reviews-grid { grid-template-columns: 1fr; gap: 20px; }
+      .cart-drawer { width: 100%; right: -100%; }
+      .form-row { grid-template-columns: 1fr; }
+      
+      .about-box { padding: 25px 20px; }
+      .about-title { font-size: 22px; }
+      .about-text { font-size: 14px; }
+      .category-banner { margin: 30px 0 25px; border-radius: 14px; }
+      .category-banner img { border-radius: 14px; }
+      
+      .reviews-header h2 { font-size: 26px; }
+      .review-card { padding: 25px 20px; }
+      
+      .promo-banner { padding: 30px 0; }
+      .promo-text h2 { font-size: 28px; }
+      .promo-text p { font-size: 14px; }
+      .promo-visual img { width: 180px; height: 180px; }
+      .promo-badge-circle { width: 60px; height: 60px; font-size: 16px; }
+      
+      .map-section { padding: 45px 0 0; }
+      .map-header h2 { font-size: 26px; }
+      .map-header h2 i { font-size: 24px; }
+      .map-wrapper iframe { height: 300px; }
+      .map-address-bar { padding: 20px 0; flex-direction: row; gap: 8px; }
+      .map-address-bar span { font-size: 15px; }
+
+      .footer { min-height: 50vh; padding-top: 50px; }
+      .footer-content { padding: 40px 0 15px; }
+      .footer-logo-box img { width: 110px; height: 110px; }
+      .footer-info h3 { font-size: 22px; }
+      .footer-info-item { font-size: 14px; flex-direction: column; gap: 4px; }
+      .footer-info-item .label { min-width: auto; }
+      .footer-social h4 { font-size: 16px; }
+      .footer-social-icons a { width: 38px; height: 38px; font-size: 16px; }
+      .footer-bottom { padding: 15px 0 20px; font-size: 13px; }
+      
+      .scroll-top-btn { width: 44px; height: 44px; font-size: 18px; bottom: 20px; right: 20px; }
+
+      .floating-cart { bottom: 18px; padding: 9px 14px 9px 12px; gap: 8px; }
+      .floating-cart-count { width: 22px; height: 22px; font-size: 11px; }
+      .floating-cart-text { font-size: 12px; }
+      .floating-cart-total { font-size: 12px; padding: 3px 8px; }
+
+      .product-modal { padding: 26px 22px; }
+      .product-modal h2 { font-size: 22px; }
+      .size-option { padding: 14px 16px; }
+      .size-name { font-size: 15px; }
+      .size-price { font-size: 15px; }
+
+      .modal-header { padding: 22px 22px 8px; }
+      .modal-header h3 { font-size: 20px; }
+      .modal-body { padding: 16px 22px 22px; }
+
+      .branch-info { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+
+    /* ✅ SMALL MOBILE (480px) */
+    @media (max-width: 480px) {
+      .hero { padding: 84px 12px 20px; }
+      .hero-bg-slide { height: 190px; border-radius: 16px; }
+      
+      .hero-arrow { top: 179px; width: 32px; height: 32px; }
+      .hero-arrow.prev { left: 16px; }
+      .hero-arrow.next { right: 16px; }
+      .hero-arrow svg { width: 14px; height: 14px; }
+
+      .hero-dots { top: 246px; }
+      .hero-dot { width: 7px; height: 7px; }
+      .hero-dot.active { width: 20px; }
+
+      .hero-grid { padding-top: 18px; }
+      .hero-buttons { gap: 9px; margin-bottom: 14px; }
+      .hero-buttons .btn { padding: 12px 16px; font-size: 13px; }
+      .hero-features { gap: 12px; }
+      .hero-feature { font-size: 10px; }
+      .hero-feature i { font-size: 13px; }
+
+      .categories-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .category-img { height: 60px; }
+      .category-card h4 { font-size: 14px; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .filter-bar { gap: 6px; }
+      .filter-btn { padding: 6px 12px; font-size: 12px; }
+      .section { padding: 45px 0; }
+      .logo-text { font-size: 20px; }
+      .nav-logo img { width: 36px; height: 36px; }
+      .nav-container { padding: 12px 14px; gap: 8px; }
+      .cart-btn { width: 44px; height: 44px; }
+      .cart-btn svg { width: 22px; height: 22px; }
+      .category-banner { margin: 25px 0 20px; border-radius: 10px; }
+      .category-banner img { border-radius: 10px; }
+      
+      .reviews-header h2 { font-size: 22px; }
+      .review-text { font-size: 14px; }
+      .review-author { font-size: 14px; }
+      
+      .promo-banner { padding: 25px 0; }
+      .promo-text h2 { font-size: 24px; }
+      .promo-text p { font-size: 13px; }
+      .promo-visual img { width: 150px; height: 150px; border-width: 5px; }
+      .promo-badge-circle { width: 50px; height: 50px; font-size: 14px; right: 20px; }
+      
+      .map-section { padding: 35px 0 0; }
+      .map-header h2 { font-size: 22px; gap: 10px; }
+      .map-header h2 i { font-size: 20px; }
+      .map-wrapper iframe { height: 240px; }
+      .map-address-bar { padding: 16px 0; }
+      .map-address-bar span { font-size: 14px; }
+      .map-address-bar i { font-size: 18px; }
+
+      .footer { min-height: 45vh; padding-top: 40px; }
+      .footer-content { padding: 30px 0 10px; }
+      .footer-logo-box img { width: 95px; height: 95px; }
+      .footer-info h3 { font-size: 20px; }
+      .footer-social-icons a { width: 36px; height: 36px; font-size: 15px; }
+      .footer-social-links { flex-direction: column; gap: 8px; }
+      .footer-bottom { padding: 12px 0 15px; font-size: 12px; }
+      .scroll-top-btn { width: 40px; height: 40px; font-size: 16px; bottom: 15px; right: 15px; }
+
+      .floating-cart { bottom: 12px; padding: 8px 12px 8px 10px; gap: 7px; }
+      .floating-cart-count { width: 20px; height: 20px; font-size: 10px; }
+      .floating-cart-text { font-size: 11px; }
+      .floating-cart-total { font-size: 11px; padding: 2px 7px; }
+      .floating-cart-arrow { font-size: 11px; }
+
+      .product-modal { padding: 22px 18px; border-radius: 16px; }
+      .product-modal h2 { font-size: 20px; }
+      .product-modal-desc { font-size: 14px; }
+      .size-option { padding: 12px 14px; }
+      .size-name { font-size: 14px; }
+      .size-price { font-size: 14px; }
+      .size-radio { width: 18px; height: 18px; }
+      .size-option.selected .size-radio::after { width: 8px; height: 8px; }
+      .add-to-cart-btn { padding: 14px; font-size: 15px; }
+
+      .modal-header { padding: 20px 18px 8px; }
+      .modal-header h3 { font-size: 18px; }
+      .modal-body { padding: 14px 18px 20px; }
+      .order-summary-box { padding: 14px 16px; }
+      .place-order-btn { padding: 14px; font-size: 15px; }
+      .confirm-modal { padding: 32px 24px 24px; }
+      .confirm-modal h3 { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== SKELETON LOADER ==================== -->
+  <div class="skeleton-loader" id="skeletonLoader">
+    <div class="skeleton-nav">
+      <div class="skeleton-logo"></div>
+      <div class="skeleton-nav-links">
+        <div class="skeleton-nav-link"></div>
+        <div class="skeleton-nav-link"></div>
+        <div class="skeleton-nav-link"></div>
+        <div class="skeleton-nav-link"></div>
+      </div>
+      <div class="skeleton-cart"></div>
+    </div>
+    <div class="skeleton-grid">
+      <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-text-row"><div class="skeleton-avatar"></div><div class="skeleton-text-lines"><div class="skeleton-text"></div><div class="skeleton-text-sm"></div></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-text-row"><div class="skeleton-avatar"></div><div class="skeleton-text-lines"><div class="skeleton-text"></div><div class="skeleton-text-sm"></div></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-text-row"><div class="skeleton-avatar"></div><div class="skeleton-text-lines"><div class="skeleton-text"></div><div class="skeleton-text-sm"></div></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-text-row"><div class="skeleton-avatar"></div><div class="skeleton-text-lines"><div class="skeleton-text"></div><div class="skeleton-text-sm"></div></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-text-row"><div class="skeleton-avatar"></div><div class="skeleton-text-lines"><div class="skeleton-text"></div><div class="skeleton-text-sm"></div></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-text-row"><div class="skeleton-avatar"></div><div class="skeleton-text-lines"><div class="skeleton-text"></div><div class="skeleton-text-sm"></div></div></div></div>
+    </div>
+  </div>
+
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <button type="button" class="nav-logo" onclick="scrollToTop(event)" aria-label="Back to top">
+        <img src="images/albaik logo 2.jfif" alt="AlBaik Chicken Logo" onerror="this.style.display='none';" />
+        <span class="logo-text">Al<span>Baik</span></span>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="cart-btn" onclick="toggleCart()" aria-label="Cart">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ✅ Nav overlay -->
+  <div class="nav-overlay" id="navOverlay" onclick="closeMobileNav()"></div>
+
+  <!-- ==================== HERO SLIDER ==================== -->
+  <section class="hero" id="home">
+    <div class="hero-bg-slide slide-1 active"></div>
+    <div class="hero-bg-slide slide-2"></div>
+    <div class="hero-bg-slide slide-3"></div>
+    <button class="hero-arrow prev" onclick="heroSlide('prev')" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="hero-arrow next" onclick="heroSlide('next')" aria-label="Next slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <div class="hero-dots" id="heroDots">
+      <button class="hero-dot active" onclick="heroGoTo(0)" aria-label="Slide 1"></button>
+      <button class="hero-dot" onclick="heroGoTo(1)" aria-label="Slide 2"></button>
+      <button class="hero-dot" onclick="heroGoTo(2)" aria-label="Slide 3"></button>
+    </div>
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-buttons">
+          <button class="btn btn-white" onclick="scrollToMenu(event)"><i class="fas fa-shopping-bag"></i> Order Now</button>
+          <button class="btn btn-ghost" onclick="scrollToMenu(event)">View Menu</button>
+        </div>
+        <div class="hero-features">
+          <div class="hero-feature"><i class="fas fa-check-circle"></i><span>100% Fresh<br />Chicken</span></div>
+          <div class="hero-feature"><i class="fas fa-shield-alt"></i><span>Hygienic &<br />Safe</span></div>
+          <div class="hero-feature"><i class="fas fa-heart"></i><span>Loved by<br />Millions</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CATEGORIES ==================== -->
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <div><span class="section-label">OUR MENU</span><h2>Popular Categories</h2></div>
+        <a href="#menu" class="view-all">View Full Menu <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="categories-grid" id="categoriesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ==================== BESTSELLERS ==================== -->
+  <section class="section" id="bestsellers">
+    <div class="container">
+      <div class="section-header">
+        <div><span class="section-label">POPULAR MEALS</span><h2>Our Bestsellers</h2></div>
+        <div class="slider-controls">
+          <button onclick="scrollBestsellers(-1)" aria-label="Prev"><i class="fas fa-chevron-left"></i></button>
+          <button onclick="scrollBestsellers(1)" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="bestsellers-scroll" id="bestsellersScroll"></div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section class="section about-section" id="about">
+    <div class="container">
+      <div class="about-box">
+        <h2 class="about-title">AlBaik – One of the Most Popular Fast Food Restaurants</h2>
+        <div class="about-text-wrapper" id="aboutTextWrapper">
+          <p class="about-text">AlBaik is proudly recognized as one of the most popular fast food restaurants in Pakistan, serving thousands of satisfied customers every day. With a strong reputation built on quality, taste, and consistency, AlBaik has become a trusted name for fast food lovers who want delicious meals at affordable prices. Our brand stands for freshness, flavor, and reliability, making us a preferred choice in Pakistan's competitive fast food industry.</p>
+          <p class="about-text">We source only the freshest ingredients, prepare them with utmost care, and serve them with love. Our commitment to excellence ensures that every bite you take is a memorable one. Whether it's our legendary fried chicken, savory burgers, or refreshing drinks, we never compromise on quality. That's why millions of customers trust us for their daily cravings and special occasions alike.</p>
+        </div>
+        <button class="show-more-btn" id="showMoreBtn" onclick="toggleAboutText()">Show More <i class="fas fa-chevron-down"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MENU ==================== -->
+  <section class="section menu-section" id="menu">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-label">EXPLORE</span>
+        <h2>Our Complete <span style="color: var(--primary-red);">Menu</span></h2>
+        <p class="section-desc">Choose from our wide range of delicious items, freshly prepared for you.</p>
+      </div>
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-category="All" onclick="filterCategory('All', this)">All</button>
+        <button class="filter-btn" data-category="Shawarma" onclick="filterCategory('Shawarma', this)">Shawarma</button>
+        <button class="filter-btn" data-category="Burgers" onclick="filterCategory('Burgers', this)">Burgers</button>
+        <button class="filter-btn" data-category="Pizza" onclick="filterCategory('Pizza', this)">Pizza</button>
+        <button class="filter-btn" data-category="Fries & Sides" onclick="filterCategory('Fries & Sides', this)">Fries & Sides</button>
+        <button class="filter-btn" data-category="Drinks" onclick="filterCategory('Drinks', this)">Drinks</button>
+        <button class="filter-btn" data-category="Deals / Combos" onclick="filterCategory('Deals / Combos', this)">Deals / Combos</button>
+      </div>
+
+      <div class="category-banner" id="bannerShawarma"><img src="images/shawarma banner.jfif" alt="Shawarma Special" onerror="this.parentElement.style.display='none';"></div>
+      <div class="menu-grid" id="menuGridShawarma"></div>
+
+      <div class="category-banner" id="bannerBurgers"><img src="images/burger banner.jfif" alt="Burgers" onerror="this.parentElement.style.display='none';"></div>
+      <div class="menu-grid" id="menuGridBurgers"></div>
+
+      <div class="category-banner" id="bannerPizza"><img src="images/pizza banner.jfif" alt="Pizza" onerror="this.parentElement.style.display='none';"></div>
+      <div class="menu-grid" id="menuGridPizza"></div>
+
+      <div class="category-banner" id="bannerFries"><img src="images/fries banner.jfif" alt="Fries & Sides" onerror="this.parentElement.style.display='none';"></div>
+      <div class="menu-grid" id="menuGridFries"></div>
+
+      <div class="category-banner" id="bannerDrinks"><img src="images/Drinks.jfif" alt="Drinks" onerror="this.parentElement.style.display='none';"></div>
+      <div class="menu-grid" id="menuGridDrinks"></div>
+
+      <div class="category-banner" id="bannerDeals"><img src="images/deals banner.jfif" alt="Deals" onerror="this.parentElement.style.display='none';"></div>
+      <div class="menu-grid" id="menuGridDeals"></div>
+
+      <div class="no-results hidden" id="noResults">
+        <i class="fas fa-search"></i>
+        <h3>No items found</h3>
+        <p>Try a different search term or category.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== REVIEWS ==================== -->
+  <section class="section reviews-section" id="reviews">
+    <div class="container">
+      <div class="reviews-header"><h2>What Our <span>Customers Say</span></h2></div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="review-text">"The best fried chicken I've ever had! Always fresh and super tasty. AlBaik never disappoints!"</p>
+          <div class="review-author">— Ahmed Raza</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="review-text">"Amazing taste and quick service. The quality is always top-notch. My family's favorite place!"</p>
+          <div class="review-author">— Ayesha Khan</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="review-text">"Affordable, delicious, and always fresh. The Zinger Burger is my personal favorite — highly recommended!"</p>
+          <div class="review-author">— Usman Tariq</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROMO ==================== -->
+  <section class="promo-banner">
+    <div class="container promo-grid">
+      <div class="promo-text">
+        <span class="offer-badge">Limited Time</span>
+        <h2>Get <span>20% Off</span><br>Your First Order</h2>
+        <p>Use code <strong>ALBAIK20</strong> at checkout. Offer valid for new customers!</p>
+      </div>
+      <div class="promo-visual">
+        <img src="images/hero bg 1.jpg" alt="Special Offer" onerror="this.src='https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80';">
+        <div class="promo-badge-circle">20%</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MAP ==================== -->
+  <section class="map-section">
+    <div class="container">
+      <div class="map-header">
+        <h2><i class="fas fa-map-marker-alt"></i> Find Us Here</h2>
+        <p>Visit our restaurant or order online for delivery</p>
+      </div>
+      <div class="map-wrapper">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13614.666386324776!2d74.29999999999999!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190483e58107d9%3A0xc23abe6ccc7e2462!2sLahore%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1699999999999!5m2!1sen!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="map-address-bar">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Niyanalian khuda Bakhsh Road, Pakistan</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo-box">
+          <img src="images/albaik logo 2.jfif" alt="AlBaik Logo" onerror="this.style.display='none';" />
+        </div>
+        <div class="footer-info">
+          <h3>Al<span>Baik</span> Chicken</h3>
+          <div class="footer-info-item"><span class="label">Phone:</span><a href="tel:+923339871317">+92 333 9871317</a></div>
+          <div class="footer-info-item"><span class="label">Email:</span><a href="mailto:info@albaik.com">info@albaik.com</a></div>
+          <div class="footer-info-item"><span class="label">Address:</span><span class="value">Niyanalian khuda Bakhsh Road, Pakistan</span></div>
+        </div>
+        <div class="footer-social">
+          <h4>Follow Us:</h4>
+          <div class="footer-social-icons">
+            <a href="#" class="fb" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="ig" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+          <div class="footer-social-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">FAQs</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Powered by <a href="#">Awais Developer</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SCROLL TOP ==================== -->
+  <button class="scroll-top-btn" id="scrollTopBtn" onclick="scrollToTop()" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- ==================== FLOATING CART BUTTON ==================== -->
+  <button class="floating-cart" id="floatingCart" onclick="toggleCart()">
+    <span class="floating-cart-count" id="floatingCartCount">0</span>
+    <span class="floating-cart-text">View Cart</span>
+    <span class="floating-cart-total" id="floatingCartTotal">Rs 0</span>
+    <i class="fas fa-arrow-right floating-cart-arrow"></i>
+  </button>
+
+  <!-- ==================== PRODUCT DETAIL MODAL ==================== -->
+  <div class="product-modal-overlay" id="productModalOverlay" onclick="closeProductModal(event)">
+    <div class="product-modal" onclick="event.stopPropagation()">
+      <button class="product-modal-close" onclick="closeProductModal()" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 id="productModalTitle">Product Name</h2>
+      <p class="product-modal-desc" id="productModalDesc">Product description will appear here.</p>
+      <span class="size-label" id="sizeLabel">Choose your size:</span>
+      <div class="size-options" id="sizeOptions"></div>
+      <button class="add-to-cart-btn" id="modalAddToCartBtn">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- ==================== CART DRAWER ==================== -->
+  <button type="button" class="overlay" id="cartOverlay" aria-label="Close cart" onclick="toggleCart()" tabindex="0"></button>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button onclick="toggleCart()" aria-label="Close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer" id="cartFooter">
+      <div class="cart-totals" id="cartTotals"></div>
+      <button class="btn btn-primary btn-block" onclick="openCheckout()">
+        <i class="fas fa-credit-card"></i> Proceed to Checkout
+      </button>
+      <button class="btn btn-outline btn-block btn-sm" onclick="openConfirmClear()">Clear Cart</button>
+    </div>
+  </aside>
+
+  <!-- ==================== CHECKOUT MODAL ==================== -->
+  <div class="modal-overlay" id="checkoutOverlay" onclick="closeCheckout(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <h3>Complete Your Order</h3>
+          <p>Fill in your details to place the order</p>
+        </div>
+        <button onclick="closeCheckout()" aria-label="Close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="order-summary-box" id="orderSummaryBox">
+          <div class="order-summary-title"><i class="fas fa-receipt"></i> Your Order Summary</div>
+          <div id="orderSummaryItems"></div>
+          <div class="order-summary-row total">
+            <span>Total:</span>
+            <span id="orderSummaryTotal">Rs 0</span>
+          </div>
+          <div class="delivery-note">
+            <i class="fas fa-truck"></i>
+            <span>Delivery charges: Rs 100 (added at delivery)</span>
+          </div>
+        </div>
+
+        <form id="checkoutForm" onsubmit="placeOrder(event)">
+          <div class="form-group">
+            <label for="custName">Full Name <span class="required">*</span></label>
+            <input type="text" id="custName" placeholder="Enter your name" required />
+          </div>
+          <div class="form-group">
+            <label for="custWhatsapp">Phone Number <span class="required">*</span></label>
+            <input type="tel" id="custWhatsapp" placeholder="03xx xxxxxxx" required />
+          </div>
+
+          <div class="branch-info">
+            <div class="branch-info-left">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Niyanalian khuda Bakhsh Road, Pakistan</span>
+            </div>
+            <div class="branch-info-right">
+              <i class="fab fa-whatsapp"></i>
+              <a href="tel:+923339871317">+92 333 9871317</a>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="custAddress">Delivery Address <span class="required">*</span></label>
+            <textarea id="custAddress" placeholder="House No., Street, Area" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="custNotes">Additional Order Notes</label>
+            <textarea id="custNotes" rows="2" placeholder="Any special instructions..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="custPayment">Payment Method <span class="required">*</span></label>
+            <select id="custPayment" required>
+              <option value="">Select payment method</option>
+              <option value="Cash on Delivery">Cash on Delivery</option>
+              <option value="Bank Transfer">Bank Transfer</option>
+              <option value="Easypaisa / JazzCash">Easypaisa / JazzCash</option>
+            </select>
+          </div>
+          <button type="submit" class="place-order-btn">
+            <i class="fab fa-whatsapp"></i> Place Order on WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CONFIRM CLEAR MODAL ==================== -->
+  <div class="confirm-modal-overlay" id="confirmClearOverlay" onclick="closeConfirmClear(event)">
+    <div class="confirm-modal" onclick="event.stopPropagation()">
+      <div class="confirm-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <h3>Clear Cart?</h3>
+      <p>Are you sure you want to clear your cart?</p>
+      <div class="confirm-buttons">
+        <button class="confirm-btn-no" onclick="closeConfirmClear()">No</button>
+        <button class="confirm-btn-yes" onclick="confirmClearCart()">Yes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SUCCESS MODAL ==================== -->
+  <div class="modal-overlay" id="successOverlay" onclick="closeSuccess(event)">
+    <div class="modal success-modal" onclick="event.stopPropagation()">
+      <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+      <h3>Order Initiated!</h3>
+      <p>Your order has been prepared and WhatsApp is opening. Please <strong>send the message</strong> to confirm your order.</p>
+      <button class="btn btn-primary" onclick="closeSuccess()"><i class="fas fa-utensils"></i> Back to Menu</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* ==================== SKELETON LOADER ==================== */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const skeleton = document.getElementById('skeletonLoader');
+        if (skeleton) skeleton.classList.add('hidden');
+      }, 600);
+    });
+    setTimeout(() => {
+      const skeleton = document.getElementById('skeletonLoader');
+      if (skeleton && !skeleton.classList.contains('hidden')) skeleton.classList.add('hidden');
+    }, 3000);
+
+    /* ==================== HERO SLIDER ==================== */
+    let heroCurrent = 0;
+    let heroAutoTimer = null;
+    const HERO_AUTO_DELAY = 5000;
+
+    function heroUpdate() {
+      const slides = document.querySelectorAll('.hero-bg-slide');
+      const dots = document.querySelectorAll('.hero-dot');
+      slides.forEach((s, i) => s.classList.toggle('active', i === heroCurrent));
+      dots.forEach((d, i) => d.classList.toggle('active', i === heroCurrent));
+    }
+    function heroGoTo(index) {
+      const slides = document.querySelectorAll('.hero-bg-slide');
+      if (slides.length === 0) return;
+      heroCurrent = (index + slides.length) % slides.length;
+      heroUpdate(); heroRestartAuto();
+    }
+    function heroSlide(direction) {
+      const slides = document.querySelectorAll('.hero-bg-slide');
+      if (slides.length === 0) return;
+      heroCurrent = direction === 'next' ? (heroCurrent + 1) % slides.length : (heroCurrent - 1 + slides.length) % slides.length;
+      heroUpdate(); heroRestartAuto();
+    }
+    function heroRestartAuto() {
+      clearInterval(heroAutoTimer);
+      heroAutoTimer = setInterval(() => heroSlide('next'), HERO_AUTO_DELAY);
+    }
+    document.addEventListener('DOMContentLoaded', heroRestartAuto);
+
+    function toggleAboutText() {
+      const wrapper = document.getElementById('aboutTextWrapper');
+      const btn = document.getElementById('showMoreBtn');
+      wrapper.classList.toggle('expanded');
+      btn.classList.toggle('active');
+      btn.innerHTML = wrapper.classList.contains('expanded') ? 'Show Less <i class="fas fa-chevron-down"></i>' : 'Show More <i class="fas fa-chevron-down"></i>';
+    }
+
+    /* ==================== DATA ==================== */
+    const RESTAURANT_WHATSAPP = "923339871317";
+    const DELIVERY_FEE = 100;
+    const CURRENCY = "Rs.";
+    const RESTAURANT_NAME = "AlBaik";
+    const RESTAURANT_ADDRESS = "Niyanalian khuda Bakhsh Road, Pakistan";
+
+    const products = [
+      { id: 1, name: "Chicken Shawarma", category: "Shawarma", description: "Delicious chicken shawarma with fresh ingredients.", price: 250, image: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500&q=80",
+        sizes: [{ name: "Small", price: 250 }, { name: "Medium", price: 320 }, { name: "Large", price: 400 }] },
+      { id: 2, name: "Arabic Shawarma", category: "Shawarma", description: "Authentic Arabic style shawarma wrap.", price: 300, image: "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500&q=80",
+        sizes: [{ name: "Small", price: 300 }, { name: "Medium", price: 380 }, { name: "Large", price: 480 }] },
+      { id: 3, name: "Spicy Shawarma", category: "Shawarma", description: "Shawarma with a spicy kick.", price: 280, image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=500&q=80",
+        sizes: [{ name: "Small", price: 280 }, { name: "Medium", price: 360 }, { name: "Large", price: 450 }] },
+      { id: 4, name: "Cheese Shawarma", category: "Shawarma", description: "Shawarma loaded with melted cheese.", price: 320, image: "https://images.unsplash.com/photo-1633321702518-7d1b9e0a0a0a?w=500&q=80",
+        sizes: [{ name: "Small", price: 320 }, { name: "Medium", price: 400 }, { name: "Large", price: 500 }] },
+      { id: 5, name: "Shawarma Platter", category: "Shawarma", description: "Shawarma platter with rice and salad.", price: 450, image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=500&q=80",
+        sizes: [{ name: "Small", price: 450 }, { name: "Medium", price: 550 }, { name: "Large", price: 700 }] },
+      { id: 6, name: "Zinger Burger", category: "Burgers", description: "Crispy zinger fillet with lettuce and mayo.", price: 350, image: "images/menu 11.jfif",
+        sizes: [{ name: "Small", price: 350 }, { name: "Medium", price: 450 }, { name: "Large", price: 550 }] },
+      { id: 7, name: "Chicken Burger", category: "Burgers", description: "Classic chicken burger with fresh veggies.", price: 300, image: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=500&q=80",
+        sizes: [{ name: "Small", price: 300 }, { name: "Medium", price: 400 }, { name: "Large", price: 500 }] },
+      { id: 8, name: "Cheese Burger", category: "Burgers", description: "Juicy burger with melted cheddar cheese.", price: 380, image: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&q=80",
+        sizes: [{ name: "Small", price: 380 }, { name: "Medium", price: 480 }, { name: "Large", price: 600 }] },
+      { id: 9, name: "Spicy Zinger", category: "Burgers", description: "Spicy zinger with hot sauce.", price: 370, image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500&q=80",
+        sizes: [{ name: "Small", price: 370 }, { name: "Medium", price: 470 }, { name: "Large", price: 580 }] },
+      { id: 10, name: "Double Zinger", category: "Burgers", description: "Double patty zinger for big appetites.", price: 500, image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=500&q=80",
+        sizes: [{ name: "Small", price: 500 }, { name: "Medium", price: 650 }, { name: "Large", price: 800 }] },
+      { id: 11, name: "Chicken Pizza", category: "Pizza", description: "Crispy crust with cheesy goodness and premium chicken toppings.", price: 800, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80",
+        sizes: [{ name: "Small", price: 800 }, { name: "Medium", price: 1200 }, { name: "Large", price: 1700 }] },
+      { id: 12, name: "Cheese Pizza", category: "Pizza", description: "Classic cheese pizza with extra mozzarella.", price: 700, image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&q=80",
+        sizes: [{ name: "Small", price: 700 }, { name: "Medium", price: 1050 }, { name: "Large", price: 1500 }] },
+      { id: 13, name: "BBQ Chicken Pizza", category: "Pizza", description: "BBQ sauce base with grilled chicken and onions.", price: 900, image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=500&q=80",
+        sizes: [{ name: "Small", price: 900 }, { name: "Medium", price: 1300 }, { name: "Large", price: 1800 }] },
+      { id: 14, name: "Pepperoni Pizza", category: "Pizza", description: "Spicy pepperoni-style pizza with cheese.", price: 950, image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500&q=80",
+        sizes: [{ name: "Small", price: 950 }, { name: "Medium", price: 1350 }, { name: "Large", price: 1850 }] },
+      { id: 15, name: "Special Pizza", category: "Pizza", description: "Chef's special pizza with all premium toppings.", price: 1100, image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&q=80",
+        sizes: [{ name: "Small", price: 1100 }, { name: "Medium", price: 1500 }, { name: "Large", price: 2000 }] },
+      { id: 16, name: "Regular Fries", category: "Fries & Sides", description: "Crispy golden fries.", price: 150, image: "images/fries.jfif",
+        sizes: [{ name: "Small", price: 150 }, { name: "Medium", price: 200 }, { name: "Large", price: 250 }] },
+      { id: 17, name: "Masala Fries", category: "Fries & Sides", description: "Fries tossed in spicy masala.", price: 180, image: "images/fries.jfif",
+        sizes: [{ name: "Small", price: 180 }, { name: "Medium", price: 230 }, { name: "Large", price: 280 }] },
+      { id: 18, name: "Cheese Fries", category: "Fries & Sides", description: "Fries topped with melted cheese.", price: 220, image: "images/fries.jfif",
+        sizes: [{ name: "Small", price: 220 }, { name: "Medium", price: 270 }, { name: "Large", price: 320 }] },
+      { id: 19, name: "Loaded Fries", category: "Fries & Sides", description: "Loaded with cheese, chicken and sauces.", price: 300, image: "images/fries.jfif",
+        sizes: [{ name: "Small", price: 300 }, { name: "Medium", price: 400 }, { name: "Large", price: 500 }] },
+      { id: 20, name: "Chicken Nuggets", category: "Fries & Sides", description: "Crispy chicken nuggets.", price: 250, image: "images/menu 12.jfif",
+        sizes: [{ name: "Small", price: 250 }, { name: "Medium", price: 330 }, { name: "Large", price: 400 }] },
+      { id: 21, name: "Chicken Strips", category: "Fries & Sides", description: "Juicy chicken strips.", price: 280, image: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&q=80",
+        sizes: [{ name: "Small", price: 280 }, { name: "Medium", price: 360 }, { name: "Large", price: 420 }] },
+      { id: 22, name: "Garlic Sauce", category: "Dips & Sauces", description: "Creamy garlic mayo dip.", price: 50, image: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500&q=80",
+        sizes: [{ name: "Small", price: 50 }, { name: "Medium", price: 100 }, { name: "Large", price: 150 }] },
+      { id: 23, name: "Cheese Dip", category: "Dips & Sauces", description: "Rich and creamy cheese dip.", price: 80, image: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500&q=80",
+        sizes: [{ name: "Small", price: 80 }, { name: "Medium", price: 140 }, { name: "Large", price: 200 }] },
+      { id: 24, name: "Spicy Sauce", category: "Dips & Sauces", description: "Hot and spicy dipping sauce.", price: 60, image: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500&q=80",
+        sizes: [{ name: "Small", price: 60 }, { name: "Medium", price: 110 }, { name: "Large", price: 160 }] },
+      { id: 25, name: "BBQ Sauce", category: "Dips & Sauces", description: "Smoky BBQ dipping sauce.", price: 70, image: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500&q=80",
+        sizes: [{ name: "Small", price: 70 }, { name: "Medium", price: 130 }, { name: "Large", price: 180 }] },
+      { id: 26, name: "Special Dip", category: "Dips & Sauces", description: "Chef's special signature dip.", price: 100, image: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500&q=80",
+        sizes: [{ name: "Small", price: 100 }, { name: "Medium", price: 170 }, { name: "Large", price: 240 }] },
+      { id: 27, name: "Coca-Cola", category: "Drinks", description: "Chilled Coca-Cola.", price: 100, image: "images/cocacola.jfif",
+        sizes: [{ name: "Small", price: 100 }, { name: "Medium", price: 150 }, { name: "Large", price: 200 }] },
+      { id: 28, name: "Pepsi", category: "Drinks", description: "Chilled Pepsi.", price: 100, image: "images/pepsi.jfif",
+        sizes: [{ name: "Small", price: 100 }, { name: "Medium", price: 150 }, { name: "Large", price: 200 }] },
+      { id: 29, name: "Sprite", category: "Drinks", description: "Chilled Sprite.", price: 100, image: "images/sprite.jfif",
+        sizes: [{ name: "Small", price: 100 }, { name: "Medium", price: 150 }, { name: "Large", price: 200 }] },
+      { id: 30, name: "Fanta", category: "Drinks", description: "Chilled Fanta.", price: 100, image: "images/fanta.jfif",
+        sizes: [{ name: "Small", price: 100 }, { name: "Medium", price: 150 }, { name: "Large", price: 200 }] },
+      { id: 31, name: "7UP", category: "Drinks", description: "Chilled 7UP.", price: 100, image: "images/7up.jfif",
+        sizes: [{ name: "Small", price: 100 }, { name: "Medium", price: 150 }, { name: "Large", price: 200 }] },
+      { id: 32, name: "Mineral Water", category: "Drinks", description: "Pure mineral water.", price: 50, image: "images/water.jfif",
+        sizes: [{ name: "Small", price: 50 }, { name: "Medium", price: 80 }, { name: "Large", price: 100 }] },
+      { id: 33, name: "Zinger Combo", category: "Deals / Combos", description: "Zinger burger + fries + drink.", price: 550, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&q=80" },
+      { id: 34, name: "Shawarma Combo", category: "Deals / Combos", description: "Shawarma + fries + drink.", price: 450, image: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500&q=80" },
+      { id: 35, name: "Family Deal", category: "Deals / Combos", description: "8 pcs chicken + 4 fries + 1.5L drink.", price: 2999, image: "images/menu 13.jfif" },
+      { id: 36, name: "Burger Deal", category: "Deals / Combos", description: "2 burgers + fries + 2 drinks.", price: 800, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&q=80" },
+      { id: 37, name: "Pizza Deal", category: "Deals / Combos", description: "Medium pizza + garlic bread + drink.", price: 1200, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80" },
+      { id: 38, name: "Chicken Meal", category: "Deals / Combos", description: "2 pcs chicken + fries + drink.", price: 750, image: "images/menu 14.jfif" },
+      { id: 39, name: "Chicken Burger Meal", category: "Deals / Combos", description: "Crispy chicken burger + fries + drink.", price: 550, image: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=500&q=80" },
+      { id: 40, name: "Nuggets Meal", category: "Deals / Combos", description: "10 pcs nuggets + fries + dip.", price: 499, image: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&q=80" }
+    ];
+
+    let cart = [];
+    let activeCategory = "All";
+    let searchQuery = "";
+    let currentProduct = null;
+    let selectedSize = null;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadCart();
+      renderCategories();
+      renderBestsellers();
+      renderMenu();
+      updateCartUI();
+      setupSmoothScroll();
+      initScrollTopButton();
+      initScrollSpy();
+    });
+
+    function scrollToTop(e) { if (e) e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); closeMobileNav(); }
+    function scrollToMenu(e) { if (e) e.preventDefault(); document.getElementById("menu").scrollIntoView({ behavior: "smooth" }); closeMobileNav(); }
+    
+    /* ✅ NAV OPEN/CLOSE - with overlay */
+    function toggleMobileNav() { 
+      const navLinks = document.getElementById("navLinks");
+      const overlay = document.getElementById("navOverlay");
+      const hamburger = document.getElementById("hamburger");
+      const isActive = navLinks.classList.contains("active");
+      
+      if (isActive) {
+        closeMobileNav();
+      } else {
+        navLinks.classList.add("active");
+        overlay.classList.add("active");
+        hamburger.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+    }
+    
+    function closeMobileNav() { 
+      const navLinks = document.getElementById("navLinks");
+      const overlay = document.getElementById("navOverlay");
+      const hamburger = document.getElementById("hamburger");
+      navLinks.classList.remove("active");
+      overlay.classList.remove("active");
+      hamburger.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    function setupSmoothScroll() {
+      document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+        link.addEventListener("click", function (e) {
+          const id = this.getAttribute("href").substring(1);
+          const target = document.getElementById(id);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth" });
+            document.querySelectorAll(".nav-links a").forEach(a => a.classList.remove("active"));
+            this.classList.add("active");
+            closeMobileNav();
+          }
+        });
+      });
+    }
+
+    function initScrollSpy() {
+      const sections = [
+        { id: 'home', el: document.getElementById('home') },
+        { id: 'menu', el: document.getElementById('menu') },
+        { id: 'about', el: document.getElementById('about') },
+        { id: 'reviews', el: document.getElementById('reviews') },
+        { id: 'contact', el: document.getElementById('contact') }
+      ].filter(s => s.el);
+
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      function updateActive() {
+        const scrollPos = window.scrollY + 120;
+        const windowHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        
+        if ((windowHeight + window.scrollY) >= docHeight - 50) {
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#contact');
+          });
+          return;
+        }
+
+        let currentId = 'home';
+        sections.forEach(section => {
+          const top = section.el.offsetTop;
+          const bottom = top + section.el.offsetHeight;
+          if (scrollPos >= top && scrollPos < bottom) {
+            currentId = section.id;
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+        });
+      }
+
+      window.addEventListener('scroll', updateActive, { passive: true });
+      window.addEventListener('resize', updateActive, { passive: true });
+      updateActive();
+    }
+
+    function initScrollTopButton() {
+      const btn = document.getElementById("scrollTopBtn");
+      if (!btn) return;
+      window.addEventListener("scroll", () => {
+        btn.classList.toggle("visible", window.scrollY > 400);
+      });
+    }
+
+    /* ==================== RENDER ==================== */
+    function renderCategories() {
+      const categories = [
+        { name: "Chicken", filter: "Deals / Combos", img: "images/menu 1 .jpg" },
+        { name: "Burgers", filter: "Burgers", img: "images/menu 2.jfif" },
+        { name: "Nuggets", filter: "Fries & Sides", img: "images/menu 3..jfif" },
+        { name: "Sides", filter: "Fries & Sides", img: "images/menu 4.jfif" },
+        { name: "Drinks", filter: "Drinks", img: "images/menu 5.jpg" },
+        { name: "Family Meals", filter: "Deals / Combos", img: "images/menu 6.jpg" }
+      ];
+      const grid = document.getElementById("categoriesGrid");
+      if (!grid) return;
+      grid.innerHTML = categories.map(c => `
+        <div class="category-card" onclick="filterCategory('${c.filter}', document.querySelector('.filter-btn[data-category=\\'${c.filter}\\']'))">
+          <img src="${c.img}" alt="${c.name}" class="category-img" loading="lazy" onerror="this.src='https://placehold.co/200x100/D62828/FFFFFF?text=${c.name}'">
+          <h4>${c.name}</h4>
+          <span>View Items <i class="fas fa-arrow-right"></i></span>
+        </div>
+      `).join("");
+    }
+
+    function renderBestsellers() {
+      const ids = new Set([35, 38, 6, 20]);
+      const bestsellers = products.filter(p => ids.has(p.id));
+      const container = document.getElementById("bestsellersScroll");
+      if (!container) return;
+      container.innerHTML = bestsellers.map(p => `
+        <div class="bestseller-card" onclick="openProductModal(${p.id})">
+          <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/260x160/D62828/FFFFFF?text=AlBaik'">
+          <div class="bestseller-info">
+            <h4>${p.name}</h4>
+            <p>${p.description}</p>
+            <div class="price">From ${CURRENCY} ${p.price.toLocaleString()}</div>
+            <button class="btn btn-primary btn-sm btn-block" onclick="event.stopPropagation(); openProductModal(${p.id})">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function scrollBestsellers(direction) {
+      const container = document.getElementById("bestsellersScroll");
+      if (!container) return;
+      container.scrollBy({ left: direction * 280, behavior: "smooth" });
+    }
+
+    function renderMenu() {
+      const noResults = document.getElementById("noResults");
+      if (!document.getElementById("menuGridShawarma")) return;
+
+      let filtered = products;
+      if (activeCategory !== "All") filtered = filtered.filter(p => p.category === activeCategory);
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase().trim();
+        filtered = filtered.filter(p =>
+          p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
+        );
+      }
+
+      const shawarmaItems = filtered.filter(p => p.category === "Shawarma");
+      const burgerItems = filtered.filter(p => p.category === "Burgers");
+      const pizzaItems = filtered.filter(p => p.category === "Pizza");
+      const friesItems = filtered.filter(p => p.category === "Fries & Sides");
+      const drinksItems = filtered.filter(p => p.category === "Drinks");
+      const dealsItems = filtered.filter(p => p.category === "Deals / Combos");
+
+      const cardHTML = (p) => `
+        <div class="menu-card" onclick="openProductModal(${p.id})">
+          <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/400x300/D62828/FFFFFF?text=AlBaik'">
+          <div class="menu-info">
+            <h4>${p.name}</h4>
+            <p>${p.description}</p>
+            <div class="price">From ${CURRENCY} ${p.price.toLocaleString()}</div>
+            <button class="btn btn-primary btn-sm btn-block" onclick="event.stopPropagation(); openProductModal(${p.id})">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      `;
+
+      function updateSection(gridId, bannerId, items) {
+        const grid = document.getElementById(gridId);
+        const banner = document.getElementById(bannerId);
+        if (!grid || !banner) return;
+        if (items.length > 0) {
+          grid.innerHTML = items.map(cardHTML).join("");
+          grid.style.display = "grid";
+          banner.style.display = "block";
+        } else {
+          grid.innerHTML = "";
+          grid.style.display = "none";
+          banner.style.display = "none";
+        }
+      }
+
+      updateSection("menuGridShawarma", "bannerShawarma", shawarmaItems);
+      updateSection("menuGridBurgers", "bannerBurgers", burgerItems);
+      updateSection("menuGridPizza", "bannerPizza", pizzaItems);
+      updateSection("menuGridFries", "bannerFries", friesItems);
+      updateSection("menuGridDrinks", "bannerDrinks", drinksItems);
+      updateSection("menuGridDeals", "bannerDeals", dealsItems);
+
+      const totalItems = shawarmaItems.length + burgerItems.length + pizzaItems.length + friesItems.length + drinksItems.length + dealsItems.length;
+      noResults.classList.toggle("hidden", totalItems !== 0);
+    }
+
+    function filterCategory(category, btn) {
+      activeCategory = category;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+      renderMenu();
+      document.getElementById("menu").scrollIntoView({ behavior: "smooth" });
+    }
+
+    /* ==================== PRODUCT MODAL ==================== */
+    function openProductModal(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      currentProduct = product;
+
+      const hasSizes = product.sizes && product.sizes.length > 0;
+      const sizes = hasSizes ? product.sizes : [{ name: "Standard", price: product.price }];
+      selectedSize = sizes[0];
+
+      document.getElementById("productModalTitle").textContent = product.name;
+      document.getElementById("productModalDesc").textContent = product.description;
+
+      const sizeLabel = document.getElementById("sizeLabel");
+      const sizeOptionsEl = document.getElementById("sizeOptions");
+
+      if (hasSizes && product.category !== "Deals / Combos") {
+        sizeLabel.style.display = "block";
+        sizeOptionsEl.style.display = "flex";
+        sizeOptionsEl.innerHTML = sizes.map((s, i) => `
+          <div class="size-option ${i === 0 ? 'selected' : ''}" onclick="selectSize(${i})" data-index="${i}">
+            <div class="size-option-left">
+              <div class="size-radio"></div>
+              <span class="size-name">${s.name}</span>
+            </div>
+            <span class="size-price">${CURRENCY} ${s.price.toLocaleString()}</span>
+          </div>
+        `).join("");
+      } else {
+        sizeLabel.style.display = "none";
+        sizeOptionsEl.style.display = "none";
+        sizeOptionsEl.innerHTML = "";
+        selectedSize = { name: "Standard", price: product.price };
+      }
+
+      const addBtn = document.getElementById("modalAddToCartBtn");
+      addBtn.textContent = "Add to Cart";
+      addBtn.onclick = () => confirmAddToCart();
+
+      document.getElementById("productModalOverlay").classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function selectSize(index) {
+      if (!currentProduct) return;
+      const sizes = currentProduct.sizes && currentProduct.sizes.length > 0 
+        ? currentProduct.sizes 
+        : [{ name: "Standard", price: currentProduct.price }];
+      selectedSize = sizes[index];
+      document.querySelectorAll(".size-option").forEach((el, i) => {
+        el.classList.toggle("selected", i === index);
+      });
+    }
+
+    function confirmAddToCart() {
+      if (!currentProduct || !selectedSize) return;
+      addToCartWithSize(currentProduct, selectedSize);
+      closeProductModal();
+    }
+
+    function closeProductModal(e) {
+      if (e && e.target !== e.currentTarget) return;
+      document.getElementById("productModalOverlay").classList.remove("active");
+      document.body.style.overflow = "";
+      currentProduct = null;
+      selectedSize = null;
+    }
+
+    /* ==================== CART ==================== */
+    function loadCart() {
+      const saved = localStorage.getItem("albaik_cart");
+      if (!saved) return;
+      try { cart = JSON.parse(saved); } catch (e) { cart = []; }
+    }
+    function saveCart() { localStorage.setItem("albaik_cart", JSON.stringify(cart)); }
+
+    function addToCartWithSize(product, size) {
+      const isDeal = product.category === "Deals / Combos";
+      const variant = isDeal ? "" : size.name;
+      const price = size.price;
+      
+      const existing = cart.find(item => 
+        item.id === product.id && (isDeal || item.variant === variant)
+      );
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          variant: variant,
+          price: price,
+          image: product.image,
+          quantity: 1
+        });
+      }
+      saveCart(); updateCartUI();
+    }
+
+    function addToCart(productId) { openProductModal(productId); }
+    function removeFromCart(cartIndex) { cart.splice(cartIndex, 1); saveCart(); updateCartUI(); }
+    function updateQuantity(cartIndex, delta) {
+      const item = cart[cartIndex];
+      if (!item) return;
+      item.quantity += delta;
+      if (item.quantity <= 0) { cart.splice(cartIndex, 1); }
+      saveCart(); updateCartUI();
+    }
+
+    function openConfirmClear() {
+      document.getElementById("confirmClearOverlay").classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+    function closeConfirmClear(e) {
+      if (e && e.target !== e.currentTarget) return;
+      document.getElementById("confirmClearOverlay").classList.remove("active");
+      document.body.style.overflow = "";
+    }
+    function confirmClearCart() {
+      cart = []; saveCart(); updateCartUI();
+      document.getElementById("confirmClearOverlay").classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    function getCartTotals() {
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const delivery = cart.length > 0 ? DELIVERY_FEE : 0;
+      const total = subtotal + delivery;
+      return { subtotal, totalItems, delivery, total };
+    }
+
+    function updateCartUI() {
+      const { totalItems, subtotal, total } = getCartTotals();
+      
+      const cartCount = document.getElementById("cartCount");
+      if (cartCount) cartCount.textContent = totalItems;
+
+      const floatingCart = document.getElementById("floatingCart");
+      const floatingCartCount = document.getElementById("floatingCartCount");
+      const floatingCartTotal = document.getElementById("floatingCartTotal");
+      if (floatingCart && floatingCartCount && floatingCartTotal) {
+        if (cart.length > 0) {
+          floatingCart.classList.add("visible");
+          floatingCartCount.textContent = totalItems;
+          floatingCartTotal.textContent = `${CURRENCY}${subtotal.toLocaleString()}`;
+        } else {
+          floatingCart.classList.remove("visible");
+        }
+      }
+
+      const cartItems = document.getElementById("cartItems");
+      const cartFooter = document.getElementById("cartFooter");
+      const cartTotals = document.getElementById("cartTotals");
+
+      if (!cartItems) return;
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-bag"></i><h3>Your cart is empty</h3><p>Add some delicious items to get started.</p></div>`;
+        cartFooter.style.display = "none";
+        return;
+      }
+      cartFooter.style.display = "block";
+
+      cartItems.innerHTML = cart.map((item, index) => `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}" onerror="this.src='https://placehold.co/70x70/D62828/FFFFFF?text=Food'">
+          <div class="cart-item-info">
+            <h4>${item.name}</h4>
+            ${item.variant ? `<div class="variant">${item.variant}</div>` : ''}
+            <div class="price">${CURRENCY} ${item.price.toLocaleString()}</div>
+            <div class="cart-item-controls">
+              <button onclick="updateQuantity(${index}, -1)">−</button>
+              <span>${item.quantity}</span>
+              <button onclick="updateQuantity(${index}, 1)">+</button>
+            </div>
+          </div>
+          <button class="cart-item-remove" onclick="removeFromCart(${index})" aria-label="Remove"><i class="fas fa-trash-alt"></i></button>
+        </div>
+      `).join("");
+
+      const { delivery } = getCartTotals();
+      cartTotals.innerHTML = `
+        <div class="row"><span>Subtotal</span><span>${CURRENCY} ${subtotal.toLocaleString()}</span></div>
+        <div class="row"><span>Delivery</span><span>${CURRENCY} ${delivery.toLocaleString()}</span></div>
+        <div class="row total"><span>Total</span><span>${CURRENCY} ${total.toLocaleString()}</span></div>
+      `;
+    }
+
+    function toggleCart() {
+      const drawer = document.getElementById("cartDrawer");
+      const overlay = document.getElementById("cartOverlay");
+      drawer.classList.toggle("active");
+      overlay.classList.toggle("active");
+      document.body.style.overflow = drawer.classList.contains("active") ? "hidden" : "";
+    }
+
+    /* ==================== CHECKOUT ==================== */
+    function openCheckout() {
+      if (cart.length === 0) return;
+      const drawer = document.getElementById("cartDrawer");
+      const overlay = document.getElementById("cartOverlay");
+      drawer.classList.remove("active");
+      overlay.classList.remove("active");
+      renderOrderSummary();
+      document.getElementById("checkoutOverlay").classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeCheckout(e) {
+      if (e && e.target !== e.currentTarget) return;
+      document.getElementById("checkoutOverlay").classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    function renderOrderSummary() {
+      const itemsEl = document.getElementById("orderSummaryItems");
+      const totalEl = document.getElementById("orderSummaryTotal");
+      if (!itemsEl || !totalEl) return;
+
+      itemsEl.innerHTML = cart.map(item => `
+        <div class="order-summary-row">
+          <span>${item.name}${item.variant ? ` (${item.variant})` : ''} × ${item.quantity}</span>
+          <span>${CURRENCY} ${(item.price * item.quantity).toLocaleString()}</span>
+        </div>
+      `).join("");
+
+      const { subtotal } = getCartTotals();
+      totalEl.textContent = `${CURRENCY} ${subtotal.toLocaleString()}`;
+    }
+
+    function placeOrder(e) {
+      e.preventDefault();
+      const name = document.getElementById("custName").value.trim();
+      const whatsapp = document.getElementById("custWhatsapp").value.trim();
+      const address = document.getElementById("custAddress").value.trim();
+      const notes = document.getElementById("custNotes").value.trim();
+      const payment = document.getElementById("custPayment").value;
+
+      if (!name || !whatsapp || !address || !payment) return;
+      if (cart.length === 0) return;
+
+      const { subtotal, delivery, total } = getCartTotals();
+
+      let message = `*${RESTAURANT_NAME} — New Order*\n\n`;
+      message += `*Customer Name:* ${name}\n`;
+      message += `*WhatsApp:* ${whatsapp}\n`;
+      message += `*Delivery Address:* ${address}\n`;
+      message += `*Branch:* ${RESTAURANT_ADDRESS}\n\n`;
+      message += `*Order Details:*\n`;
+      cart.forEach((item, index) => {
+        const variant = item.variant ? ` (${item.variant})` : '';
+        message += `${index + 1}. ${item.name}${variant} × ${item.quantity} — ${CURRENCY} ${(item.price * item.quantity).toLocaleString()}\n`;
+      });
+      message += `\n*Subtotal:* ${CURRENCY} ${subtotal.toLocaleString()}\n`;
+      message += `*Delivery:* ${CURRENCY} ${delivery.toLocaleString()}\n`;
+      message += `*Total:* ${CURRENCY} ${total.toLocaleString()}\n\n`;
+      message += `*Payment:* ${payment}\n`;
+      if (notes) message += `*Notes:* ${notes}\n`;
+      message += `\nThank you for ordering from ${RESTAURANT_NAME}!`;
+
+      const url = `https://wa.me/${RESTAURANT_WHATSAPP}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+
+      closeCheckout();
+      document.getElementById("successOverlay").classList.add("active");
+      document.body.style.overflow = "hidden";
+      setTimeout(() => { cart = []; saveCart(); updateCartUI(); }, 500);
+    }
+
+    function closeSuccess(e) {
+      if (e && e.target !== e.currentTarget) return;
+      document.getElementById("successOverlay").classList.remove("active");
+      document.body.style.overflow = "";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* ==================== GLOBAL ==================== */
+    window.scrollToTop = scrollToTop;
+    window.scrollToMenu = scrollToMenu;
+    window.toggleMobileNav = toggleMobileNav;
+    window.closeMobileNav = closeMobileNav;
+    window.toggleAboutText = toggleAboutText;
+    window.filterCategory = filterCategory;
+    window.addToCart = addToCart;
+    window.removeFromCart = removeFromCart;
+    window.updateQuantity = updateQuantity;
+    window.toggleCart = toggleCart;
+    window.openCheckout = openCheckout;
+    window.closeCheckout = closeCheckout;
+    window.placeOrder = placeOrder;
+    window.closeSuccess = closeSuccess;
+    window.scrollBestsellers = scrollBestsellers;
+    window.heroSlide = heroSlide;
+    window.heroGoTo = heroGoTo;
+    window.openProductModal = openProductModal;
+    window.closeProductModal = closeProductModal;
+    window.selectSize = selectSize;
+    window.confirmAddToCart = confirmAddToCart;
+    window.openConfirmClear = openConfirmClear;
+    window.closeConfirmClear = closeConfirmClear;
+    window.confirmClearCart = confirmClearCart;
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const pm = document.getElementById("productModalOverlay");
+        const co = document.getElementById("checkoutOverlay");
+        const cc = document.getElementById("confirmClearOverlay");
+        const so = document.getElementById("successOverlay");
+        const cd = document.getElementById("cartDrawer");
+        const nl = document.getElementById("navLinks");
+        if (pm && pm.classList.contains('active')) closeProductModal();
+        else if (co && co.classList.contains('active')) closeCheckout();
+        else if (cc && cc.classList.contains('active')) closeConfirmClear();
+        else if (so && so.classList.contains('active')) closeSuccess();
+        else if (cd && cd.classList.contains('active')) toggleCart();
+        else if (nl && nl.classList.contains('active')) closeMobileNav();
+      }
+    });
+  </script>
+</body>
+</html>
